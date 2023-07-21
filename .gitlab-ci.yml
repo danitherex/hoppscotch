@@ -1,0 +1,30 @@
+stages:
+  - test
+  - build
+  - deploy
+
+test:
+  stage: test
+  image: node
+  before_script:
+    - npm install pnpm --global
+    - pnpm install
+  script:
+    - pnpm test
+
+build-cli:
+  stage: build
+  image: node
+  before_script:
+    - npm install pnpm --global
+    - pnpm install
+  script:
+    -pnpm build-cli
+  artifacts:
+    paths:
+      - "packages/hoppscotch-cli"
+
+push-to-artifactory:
+  stage: deploy
+  script:
+    - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
