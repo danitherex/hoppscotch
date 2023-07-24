@@ -5,22 +5,22 @@ stages:
 
 test:
   stage: test
-  image: docker-hub-remote.bahnhub.tech.rz.db.de/node:18
+  image: docker-hub-remote.bahnhub.tech.rz.db.de/guergeiro/pnpm:18-8
   tags: 
-    - cdaas-shared-agent
+    - testautomation
+    - build
   before_script:
-    - npm install pnpm --global
     - pnpm install
   script:
     - pnpm test
 
 build-cli:
   stage: build
-  image: docker-hub-remote.bahnhub.tech.rz.db.de/node:18
+  image: docker-hub-remote.bahnhub.tech.rz.db.de/guergeiro/pnpm:18-8
   tags: 
-    - cdaas-shared-agent
+    - testautomation
+    - build
   before_script:
-    - npm install pnpm --global
     - pnpm install
   script:
     -pnpm build-cli
@@ -30,8 +30,9 @@ build-cli:
 
 push-to-artifactory:
   stage: deploy
-  image: docker-hub-remote.bahnhub.tech.rz.db.de/node:18
+  image: docker-hub-remote.bahnhub.tech.rz.db.de/guergeiro/pnpm:18-8
   tags: 
-    - cdaas-shared-agent
+    - testautomation
+    - build
   script:
     - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
