@@ -5,7 +5,7 @@ stages:
 
 test:
   stage: test
-  image: node
+  image: docker-hub-remote.bahnhub.tech.rz.db.de/node:18
   tags: 
     - cdaas-shared-agent
   before_script:
@@ -16,7 +16,7 @@ test:
 
 build-cli:
   stage: build
-  image: node
+  image: docker-hub-remote.bahnhub.tech.rz.db.de/node:18
   tags: 
     - cdaas-shared-agent
   before_script:
@@ -30,7 +30,7 @@ build-cli:
 
 push-to-artifactory:
   stage: deploy
-  image: node
+  image: docker-hub-remote.bahnhub.tech.rz.db.de/node:18
   tags: 
     - cdaas-shared-agent
   script:
